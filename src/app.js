@@ -6,15 +6,12 @@ import 'express-async-errors';
 import path from 'path';
 import cors from 'cors';
 import routes from './routes';
-import sentryConfig from './config/sentry';
 
 import './database';
 
 class App {
   constructor() {
     this.server = express();
-
-    Sentry.init(sentryConfig);
 
     this.middlewares();
     this.routes();
