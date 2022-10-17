@@ -1,4 +1,7 @@
 import * as Yup from 'yup';
+import jwt from 'jsonwebtoken';
+import { promisify } from 'util';
+import authConfig from '../../config/auth';
 import User from '../models/User';
 
 class UserController {
@@ -40,6 +43,23 @@ class UserController {
     const { id, cpf, nome, email } = await User.create(req.body);
 
     return res.json({ id, cpf, nome, email });
+  }
+
+  async userInfo(req, res) {
+    const [, token] = req.headers.authorization.split(' ');
+
+    try {
+      const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+      req.userId = decoded.id;
+
+      const resultUser = await User.findOne({
+        where: { id: decoded.id },
+      });
+      const { id, cpf, nome, administrador, email } = resultUser.dataValues;
+      return res.json({ id, cpf, nome, administrador, email });
+    } catch (err) {
+      return res.status(401).json({ error: 'Token inválido.' });
+    }
   }
 
   async verificaadministrador(req, res) {

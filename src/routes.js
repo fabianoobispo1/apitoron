@@ -19,7 +19,10 @@ routes.post('/sessions', SessionController.store);
 routes.post('/sessioncpf', SessionController.loginCpf);
 
 // auth
-// routes.use(authMiddleware);
+routes.use(authMiddleware);
+
+// recuperar info usuario
+routes.get('/me', UserController.userInfo);
 
 routes.post('/files', upload.single('file'), FileController.store);
 

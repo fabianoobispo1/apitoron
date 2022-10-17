@@ -81,13 +81,13 @@ class SessionController {
         .json({ error: 'A senha digitada está incorreta ' });
     }
 
-    const { id, name } = user;
+    const { id, administrador, nome } = user;
 
     return res.json({
       user: {
         id,
-        name,
-        cpf,
+        administrador,
+        nome,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
