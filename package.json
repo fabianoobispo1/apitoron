@@ -11,6 +11,7 @@
     "dev": "nodemon src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
     "queue": "nodemon src/queue.js",
+    "build":"sucrase ./src -d ./dist --transforms imports",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
