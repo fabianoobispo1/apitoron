@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "my-webpack-project",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -8,17 +8,18 @@
   },
   "scripts": {
     "start": "node  src/server.js",
-    "startb": "NODE_ENV=production node_modules/.bin/babel-node --presets 'es2015' src/server.js",
-    "build": "NODE_ENV=production node_modules/.bin/webpack --mode production",
     "dev": "nodemon src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
-    "queue": "nodemon src/queue.js"
+    "queue": "nodemon src/queue.js",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "dependencies": {
     "@sentry/node": "5.12.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.5",
     "babel-preset-es2015": "^6.24.1",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.3",
@@ -40,11 +41,16 @@
     "yup": "^0.28.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "@webpack-cli/generators": "^2.5.0",
+    "babel-loader": "^8.2.5",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-prettier": "^3.1.2",
+    "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.1.1",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
@@ -53,5 +59,6 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
-  }
+  },
+  "description": "My webpack project"
 }
