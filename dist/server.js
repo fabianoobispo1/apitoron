@@ -3,3 +3,4 @@
 const port = process.env.PORT || 5000;
 
 _app2.default.listen(port);
+console.log('inicio');
