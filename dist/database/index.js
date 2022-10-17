@@ -29,3 +29,4 @@ class Database {
 exports. default = new Database();
 
 // criar migrations npx sequelize-cli model:generate --name eventstousers --attributes firstName:string
+// npx sequelize-cli db:migrate

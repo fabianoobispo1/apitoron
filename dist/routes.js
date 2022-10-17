@@ -12,14 +12,14 @@ const routes = new (0, _express.Router)();
 routes.post('/sessions', _SessionController2.default.store);
 routes.post('/sessioncpf', _SessionController2.default.loginCpf);
 
+// cadastrar usuario
+routes.post('/createuser', _UserController2.default.createUser);
+
 // auth
 routes.use(_auth2.default);
 
 // recuperar info usuario
 routes.get('/me', _UserController2.default.userInfo);
-
-// cadastrar usuario
-routes.post('/createuser', _UserController2.default.createUser);
 
 // adiministrador
 routes.post('/verificaadministrador', _UserController2.default.verificaadministrador);

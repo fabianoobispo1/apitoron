@@ -12,14 +12,14 @@ const routes = new Router();
 routes.post('/sessions', SessionController.store);
 routes.post('/sessioncpf', SessionController.loginCpf);
 
+// cadastrar usuario
+routes.post('/createuser', UserController.createUser);
+
 // auth
 routes.use(authMiddleware);
 
 // recuperar info usuario
 routes.get('/me', UserController.userInfo);
-
-// cadastrar usuario
-routes.post('/createuser', UserController.createUser);
 
 // adiministrador
 routes.post('/verificaadministrador', UserController.verificaadministrador);
