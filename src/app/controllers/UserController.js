@@ -128,6 +128,27 @@ class UserController {
     );
     return res.json({ res: 'Agora usuario e um adminisrtador' });
   }
+
+  async userList(req, res) {
+    const [, token] = req.headers.authorization.split(' ');
+
+    try {
+      const decoded = await promisify(jwt.verify)(token, authConfig.secret);
+      req.userId = decoded.id;
+
+      const resultUser = await User.findOne({
+        where: { id: decoded.id },
+      });
+      const { administrador } = resultUser.dataValues;
+      if (administrador) {
+        const resultAllUser = await User.findAll();
+        return res.status(401).json({ resultAllUser });
+      }
+      return res.status(200).json({ administrador });
+    } catch (err) {
+      return res.status(401).json({ error: 'Token inválido.' });
+    }
+  }
 }
 
 export default new UserController();

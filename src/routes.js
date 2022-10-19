@@ -21,6 +21,9 @@ routes.use(authMiddleware);
 // recuperar info usuario
 routes.get('/me', UserController.userInfo);
 
+// recuperar info usuario
+routes.get('/userlist', UserController.userList);
+
 // adiministrador
 routes.post('/verificaadministrador', UserController.verificaadministrador);
 routes.post('/administradorupdate', UserController.administradorUpdate);

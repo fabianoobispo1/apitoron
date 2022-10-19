@@ -35,13 +35,14 @@ class SessionController {
         .json({ error: 'A senha digitada está incorreta ' });
     }
 
-    const { id, name } = user;
+    const { id, name, administrador } = user;
 
     return res.json({
       user: {
         id,
         name,
         email,
+        administrador,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
@@ -65,12 +66,8 @@ class SessionController {
 
     const { cpf, password } = req.body;
 
-    // const cpfint = parseInt(cpf);
-
-    console.log(cpf);
     const user = await User.findOne({ where: { cpf } });
 
-    console.log(user);
     if (!user) {
       return res.status(401).json({ error: 'Usuário não existe' });
     }
