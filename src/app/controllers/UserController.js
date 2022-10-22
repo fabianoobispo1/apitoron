@@ -142,7 +142,7 @@ class UserController {
       const { administrador } = resultUser.dataValues;
       if (administrador) {
         const resultAllUser = await User.findAll();
-        return res.status(401).json({ resultAllUser });
+        return res.status(200).json({ resultAllUser });
       }
       return res.status(200).json({ administrador });
     } catch (err) {
