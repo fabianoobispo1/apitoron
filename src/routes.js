@@ -18,7 +18,7 @@ routes.post('/createuser', UserController.createUser);
 // auth
 routes.use(authMiddleware);
 
-// recuperar info usuario
+// recuperar info usuariop
 routes.get('/me', UserController.userInfo);
 
 // recuperar info usuario
