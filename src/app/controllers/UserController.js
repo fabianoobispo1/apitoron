@@ -215,28 +215,45 @@ class UserController {
           return res.status(400).json({ error: 'CPF já cadastrado.' });
         }
       }
-
       // verifica se vai ter altercao na senha
-      if (req.body.password !== '') {
-        if (req.body.password.length < 6) {
-          return res.status(400).json({ error: 'Senha invalida.' });
-        }
-      }
-
-      await User.update(
-        {
-          cpf: req.body.cpf,
-          nome: req.body.nome,
-          email: req.body.email,
-          administrador: req.body.administrador,
-          password: req.body.password,
-        },
-        {
-          where: {
-            id: req.body.id,
+      if (typeof req.body.password === 'undefined') {
+        await User.update(
+          {
+            cpf: req.body.cpf,
+            nome: req.body.nome,
+            email: req.body.email,
+            administrador: req.body.administrador,
           },
+          {
+            where: {
+              id: req.body.id,
+            },
+          }
+        );
+      } else {
+        // se tiver deve verificar o tamanho
+        if (req.body.password !== '') {
+          if (req.body.password.length < 6) {
+            return res.status(400).json({ error: 'Senha invalida.' });
+          }
         }
-      );
+
+        await User.update(
+          {
+            cpf: req.body.cpf,
+            nome: req.body.nome,
+            email: req.body.email,
+            administrador: req.body.administrador,
+            password: req.body.password,
+            password_hash: 0,
+          },
+          {
+            where: {
+              id: req.body.id,
+            },
+          }
+        );
+      }
 
       const teste = await User.findOne({ where: { id: req.body.id } });
 
