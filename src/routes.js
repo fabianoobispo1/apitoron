@@ -3,6 +3,7 @@ import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import EventController from './app/controllers/EventController';
 import EventstousersController from './app/controllers/EventstousersController';
+import LojaController from './app/controllers/LojaController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -20,18 +21,15 @@ routes.use(authMiddleware);
 
 // recuperar info usuariop
 routes.get('/me', UserController.userInfo);
-
 // recuperar lista de usuarios
 routes.get('/userlist', UserController.userList);
-
 // atualizar usuario
 routes.post('/atualizarusuario', UserController.atualizausuario);
 // remover usuario
 routes.post('/removerusuario', UserController.removerusuario);
 
-// adiministrador
-routes.post('/verificaadministrador', UserController.verificaadministrador); // remover
-routes.post('/administradorupdate', UserController.administradorUpdate); // precisa?
+// recuperar lista de lojas
+routes.get('/lojalist', LojaController.lojaList);
 
 // eventos
 routes.get('/listevents', EventController.listarEvento);

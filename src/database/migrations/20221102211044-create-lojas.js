@@ -1,34 +1,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('events', {
+    return queryInterface.createTable('lojas', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      nome_evento: {
+      loja_nome: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      quantidade_ingressos: {
+      loja_endereco: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      valor_ingressos: {
-        type: Sequelize.DECIMAL,
+      loja_sigla: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      data_evento: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      endereco_evento: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      descricao_evento: {
-        type: Sequelize.STRING,
+      loja_telefone: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       created_at: {
@@ -43,6 +35,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('events');
+    return queryInterface.dropTable('lojas');
   },
 };
