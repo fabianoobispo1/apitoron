@@ -13,15 +13,40 @@ class User extends Model {
         password_hash: Sequelize.STRING,
       },
       {
+        hooks: {
+          // dessa maneira para inserir funciona
+          beforeSave: async user => {
+            console.log('hook insert');
+            if (user.password) {
+              user.password_hash = await bcrypt.hash(user.password, 8);
+            }
+          },
+          beforeUpdate: async user => {
+            console.log('hook update');
+            if (user.password) {
+              user.password_hash = await bcrypt.hash(user.password, 8);
+            }
+          },
+        },
         sequelize,
       }
     );
 
-    this.addHook('beforeSave', async user => {
+    /*
+      dessa maneira o hook de insert funciona
+      this.addHook('beforeSave', async user => {
       if (user.password) {
         user.password_hash = await bcrypt.hash(user.password, 8);
       }
-    });
+    }); */
+
+    // dessa maneira nao funcionou
+    /*     this.addHook('beforeUpdate', async user => {
+      console.log('hook update');
+      if (user.password) {
+        user.password_hash = await bcrypt.hash(user.password, 8);
+      }
+    }); */
 
     return this;
   }
