@@ -5,10 +5,11 @@ import Event from '../app/models/Event';
 import File from '../app/models/File';
 import Eventstousers from '../app/models/Eventstousers';
 import Lojas from '../app/models/lojas';
+import Cliente from '../app/models/Cliente';
 
 import databaseConfig from '../config/database';
 
-const models = [User, Event, File, Eventstousers, Lojas];
+const models = [User, Event, File, Eventstousers, Lojas, Cliente];
 
 class Database {
   constructor() {

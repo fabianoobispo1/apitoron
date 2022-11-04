@@ -6,6 +6,7 @@ import EventstousersController from './app/controllers/EventstousersController';
 import LojaController from './app/controllers/LojaController';
 
 import authMiddleware from './app/middlewares/auth';
+import ClienteController from './app/controllers/ClienteController';
 
 const routes = new Router();
 
@@ -19,6 +20,7 @@ routes.post('/createuser', UserController.createUser);
 // auth
 routes.use(authMiddleware);
 
+// //-------------------- Rotas USUARIO -------------------
 // recuperar info usuariop
 routes.get('/me', UserController.userInfo);
 // recuperar lista de usuarios
@@ -28,6 +30,7 @@ routes.post('/atualizarusuario', UserController.atualizausuario);
 // remover usuario
 routes.post('/removerusuario', UserController.removerusuario);
 
+// //-------------------- Rotas LOJA -------------------
 // recuperar lista de lojas
 routes.get('/lojalist', LojaController.lojaList);
 // cadastrar nova loja
@@ -36,6 +39,16 @@ routes.post('/cadastrarLoja', LojaController.cadastrarLoja);
 routes.post('/atualizarloja', LojaController.atualizaloja);
 // remover loja
 routes.post('/removerloja', LojaController.removerloja);
+
+// //-------------------- Rotas CLIENTES -------------------
+// recuperar lista de Clientes
+routes.get('/clienteslist', ClienteController.Clienteslist);
+// cadastrar novo cliente
+routes.post('/cadastrarCliente', ClienteController.cadastrarCliente);
+// atualizar Cliente
+routes.post('/atualizarCliente', ClienteController.atualizaCliente);
+// remover Cliente
+routes.post('/removerCliente', ClienteController.removerCliente);
 
 // eventos
 routes.get('/listevents', EventController.listarEvento);
