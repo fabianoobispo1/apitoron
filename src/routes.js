@@ -30,6 +30,12 @@ routes.post('/removerusuario', UserController.removerusuario);
 
 // recuperar lista de lojas
 routes.get('/lojalist', LojaController.lojaList);
+// cadastrar nova loja
+routes.post('/cadastrarLoja', LojaController.cadastrarLoja);
+// atualizar loja
+routes.post('/atualizarloja', LojaController.atualizaloja);
+// remover loja
+routes.post('/removerloja', LojaController.removerloja);
 
 // eventos
 routes.get('/listevents', EventController.listarEvento);
