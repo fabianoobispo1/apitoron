@@ -52,29 +52,50 @@ class ClienteController {
         .json({ error: 'Erro de validação, confira seus dados.' });
     }
 
-    const clienteTelefoneExists = await Cliente.findOne({
-      where: { cliente_telefone: req.body.cliente_telefone },
+    const clienteAtual = await Cliente.findOne({
+      where: { id: req.body.id },
     });
 
-    if (clienteTelefoneExists) {
-      return res
-        .status(400)
-        .json({ error: 'Telefone de Cliente ja cadastrado.' });
-    }
+    if (clienteAtual) {
+      if (req.body.cliente_telefone === clienteAtual.cliente_telefone) {
+        await Cliente.update(
+          {
+            cliente_nome: req.body.cliente_nome,
+            cliente_data_nascimento: req.body.cliente_data_nascimento,
+          },
+          {
+            where: {
+              id: req.body.id,
+            },
+          }
+        );
+      } else {
+        const clientetelefoneexist = await Cliente.findOne({
+          where: { cliente_telefone: req.body.cliente_telefone },
+        });
 
-    await Cliente.update(
-      {
-        cliente_nome: req.body.cliente_nome,
-        cliente_telefone: req.body.cliente_telefone,
-        cliente_data_nascimento: req.body.cliente_data_nascimento,
-      },
-      {
-        where: {
-          id: req.body.id,
-        },
+        if (clientetelefoneexist) {
+          return res
+            .status(400)
+            .json({ error: 'Telefone de Cliente ja cadastrado.' });
+        }
+
+        await Cliente.update(
+          {
+            cliente_nome: req.body.cliente_nome,
+            cliente_telefone: req.body.cliente_telefone,
+            cliente_data_nascimento: req.body.cliente_data_nascimento,
+          },
+          {
+            where: {
+              id: req.body.id,
+            },
+          }
+        );
       }
-    );
-
+    } else {
+      return res.status(400).json({ error: 'Cliente não encontrado .' });
+    }
     const teste = await Cliente.findOne({ where: { id: req.body.id } });
 
     return res.status(200).json({ teste });
