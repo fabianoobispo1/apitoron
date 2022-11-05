@@ -5,7 +5,7 @@ import authConfig from '../../config/auth';
 import User from '../models/User';
 import Loja from '../models/Loja';
 
-class LojaController {
+class VendaController {
   async lojaList(req, res) {
     const [, token] = req.headers.authorization.split(' ');
 
@@ -27,7 +27,7 @@ class LojaController {
     }
   }
 
-  async cadastrarLoja(req, res) {
+  async cadastrarVenda(req, res) {
     const schema = Yup.object().shape({
       loja_nome: Yup.string().required(),
       loja_sigla: Yup.string().required(),
@@ -169,4 +169,4 @@ class LojaController {
   }
 }
 
-export default new LojaController();
+export default new VendaController();

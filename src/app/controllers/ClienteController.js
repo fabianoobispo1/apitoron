@@ -143,6 +143,24 @@ class ClienteController {
       return res.status(401).json({ error: 'Token inválido.' });
     }
   }
+
+  async buscarClienteTelefone(req, res) {
+    const schema = Yup.object().shape({
+      cliente_telefone: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res
+        .status(400)
+        .json({ error: 'Erro de validação, confira seus dados.' });
+    }
+
+    const cliente = await Cliente.findOne({
+      where: { cliente_telefone: req.body.cliente_telefone },
+    });
+
+    return res.status(200).json({ cliente });
+  }
 }
 
 export default new ClienteController();

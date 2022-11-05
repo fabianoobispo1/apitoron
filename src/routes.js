@@ -49,6 +49,8 @@ routes.post('/cadastrarCliente', ClienteController.cadastrarCliente);
 routes.post('/atualizarCliente', ClienteController.atualizaCliente);
 // remover Cliente
 routes.post('/removerCliente', ClienteController.removerCliente);
+// Buscar Cliente por telefone
+routes.post('/buscarClienteTelefone', ClienteController.buscarClienteTelefone);
 
 // eventos
 routes.get('/listevents', EventController.listarEvento);
