@@ -155,7 +155,7 @@ class ClienteController {
         .json({ error: 'Erro de validação, confira seus dados.' });
     }
 
-    const cliente = await Cliente.findOne({
+    const cliente = await Cliente.findAll({
       where: { cliente_telefone: req.body.cliente_telefone },
     });
 
