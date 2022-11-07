@@ -30,11 +30,11 @@ class VendaController {
 
   async cadastrarVenda(req, res) {
     const schema = Yup.object().shape({
-      idCliente: Yup.string().required(),
-      idLoja: Yup.string().required(),
-      valorVenda: Yup.string().required(),
-      dataVenda: Yup.string().required(),
-      vendaPresente: Yup.string().required(),
+      cliente_id: Yup.string().required(),
+      loja_id: Yup.string().required(),
+      venda_valor: Yup.string().required(),
+      venda_data: Yup.string().required(),
+      venda_presente: Yup.boolean().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -43,9 +43,10 @@ class VendaController {
         .json({ error: 'Erro de validação, confira seus dados.' });
     }
 
-    const { id } = await venda.create(req.body);
+    /* return res.status(200).json(req.body); */
+    const resuilt = await venda.create(req.body);
 
-    return res.json({ id });
+    return res.json(resuilt);
   }
 
   async atualizaloja(req, res) {

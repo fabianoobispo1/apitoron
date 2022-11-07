@@ -6,7 +6,7 @@ class Vendas extends Model {
       {
         venda_data: Sequelize.DATE,
         venda_valor: Sequelize.FLOAT,
-        venda_preesente: Sequelize.BOOLEAN,
+        venda_presente: Sequelize.BOOLEAN,
       },
       {
         sequelize,
