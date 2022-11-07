@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      venda_preesentee: {
+      venda_preesente: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },

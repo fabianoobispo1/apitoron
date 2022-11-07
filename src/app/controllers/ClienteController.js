@@ -156,15 +156,21 @@ class ClienteController {
     }
 
     try {
-      const { cliente_nome, cliente_data_nascimento } = await Cliente.findOne({
+      const {
+        id,
+        cliente_nome,
+        cliente_data_nascimento,
+      } = await Cliente.findOne({
         where: { cliente_telefone: req.body.cliente_telefone },
       });
 
-      return res.status(200).json({ cliente_nome, cliente_data_nascimento });
+      return res
+        .status(200)
+        .json({ id, cliente_nome, cliente_data_nascimento });
     } catch (error) {
       return res
         .status(200)
-        .json({ cliente_nome: '', cliente_data_nascimento: '' });
+        .json({ id: '', cliente_nome: '', cliente_data_nascimento: '' });
     }
   }
 }
