@@ -4,6 +4,7 @@ import { promisify } from 'util';
 import authConfig from '../../config/auth';
 import User from '../models/User';
 import Loja from '../models/Loja';
+import venda from '../models/vendas';
 
 class VendaController {
   async lojaList(req, res) {
@@ -29,10 +30,11 @@ class VendaController {
 
   async cadastrarVenda(req, res) {
     const schema = Yup.object().shape({
-      loja_nome: Yup.string().required(),
-      loja_sigla: Yup.string().required(),
-      loja_endereco: Yup.string().required(),
-      loja_telefone: Yup.string().required(),
+      idCliente: Yup.string().required(),
+      idLoja: Yup.string().required(),
+      valorVenda: Yup.string().required(),
+      dataVenda: Yup.string().required(),
+      vendaPresente: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -41,15 +43,7 @@ class VendaController {
         .json({ error: 'Erro de validação, confira seus dados.' });
     }
 
-    const lojaSiglalExists = await Loja.findOne({
-      where: { loja_sigla: req.body.loja_sigla },
-    });
-
-    if (lojaSiglalExists) {
-      return res.status(400).json({ error: 'Sigla da loja já cadastrado.' });
-    }
-
-    const { id } = await Loja.create(req.body);
+    const { id } = await venda.create(req.body);
 
     return res.json({ id });
   }

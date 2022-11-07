@@ -7,6 +7,7 @@ import LojaController from './app/controllers/LojaController';
 
 import authMiddleware from './app/middlewares/auth';
 import ClienteController from './app/controllers/ClienteController';
+import VendaController from './app/controllers/VendaController';
 
 const routes = new Router();
 
@@ -51,6 +52,10 @@ routes.post('/atualizarCliente', ClienteController.atualizaCliente);
 routes.post('/removerCliente', ClienteController.removerCliente);
 // Buscar Cliente por telefone
 routes.post('/buscarClienteTelefone', ClienteController.buscarClienteTelefone);
+
+// //-------------------- Rotas VENDAS -------------------
+// cadastrar novo cliente
+routes.post('/cadastrarVenda', VendaController.cadastrarVenda);
 
 // eventos
 routes.get('/listevents', EventController.listarEvento);
