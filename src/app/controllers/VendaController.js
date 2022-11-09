@@ -7,27 +7,6 @@ import Loja from '../models/Loja';
 import venda from '../models/vendas';
 
 class VendaController {
-  async lojaList(req, res) {
-    const [, token] = req.headers.authorization.split(' ');
-
-    try {
-      const decoded = await promisify(jwt.verify)(token, authConfig.secret);
-      req.userId = decoded.id;
-
-      const resultUser = await User.findOne({
-        where: { id: decoded.id },
-      });
-      const { administrador } = resultUser.dataValues;
-      if (administrador) {
-        const resultLoja = await Loja.findAll();
-        return res.status(200).json({ resultLoja });
-      }
-      return res.status(200).json({ administrador });
-    } catch (err) {
-      return res.status(401).json({ error: 'Token inválido.' });
-    }
-  }
-
   async cadastrarVenda(req, res) {
     const schema = Yup.object().shape({
       cliente_id: Yup.string().required(),
@@ -47,6 +26,18 @@ class VendaController {
     const resuilt = await venda.create(req.body);
 
     return res.json(resuilt);
+  }
+
+  async listarUltimasVendas(req, res) {
+    try {
+      const resultLoja = await venda.findAll({
+        order: [['venda_data', 'DESC']],
+        limit: 10,
+      });
+      return res.status(200).json({ resultLoja });
+    } catch (err) {
+      return res.status(401).json({ error: 'Token inválido.' });
+    }
   }
 
   async atualizaloja(req, res) {

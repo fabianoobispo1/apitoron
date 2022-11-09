@@ -57,6 +57,9 @@ routes.post('/buscarClienteTelefone', ClienteController.buscarClienteTelefone);
 // cadastrar novo cliente
 routes.post('/cadastrarVenda', VendaController.cadastrarVenda);
 
+// cadastrar novo cliente
+routes.get('/listarUltimasVendas', VendaController.listarUltimasVendas);
+
 // eventos
 routes.get('/listevents', EventController.listarEvento);
 routes.post('/createevents', EventController.criarEvento);
